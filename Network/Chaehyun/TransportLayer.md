@@ -63,9 +63,9 @@
 ### TCP - 전송 제어 프로토콜
 
 - TCP(Transmission Control Protocol) : 패킷 전송을 제어하여 신뢰성을 보증하는 프로토콜
-- 안전포장
-  단순히 목적지 뿐만 아니라 순서, 검증, 전송 제어 정보가 들어있음
-  ![image.png](attachment:c32bc7cf-682f-4ce9-a313-0988d3f77e22:image.png)
+- 안전포장 : 단순히 목적지 뿐만 아니라 순서, 검증, 전송 제어 정보가 들어있음
+  <img width="1722" height="606" alt="image" src="https://github.com/user-attachments/assets/de5e4f40-32dc-4156-bf4b-1058addf755b" />
+
 - TCP와 IP를 함께 사용하는데, IP가 데이터의 배달을 처리한다면 TCP는 패킷을 추적 및 관리
 - 흐름제어 및 혼잡제어 제공
 - 꼼꼼한 통신 확인
@@ -75,6 +75,8 @@
   - 4way: 통신을 마칠때
     ⇒ 단계가 차이나는 이유: 클라이언트가 데이터 전송을 마쳤다고 하더라도 서버는 아직 보낼 데이터가 남아있을 수 있기 때문에 일단 FIN에 대한 ACK만 보내고, 데이터를 모두 전송한 후에 자신도 FIN 메시지를 보내기 때문
   - 한 번 통신하는데 HandShake를 2번해서 신뢰성을 과하게 보장
+    <img width="1778" height="1522" alt="image" src="https://github.com/user-attachments/assets/df1bec31-1820-4015-ae34-ec3dfe1b3faf" />
+
 
     | Flag | 설명                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
     | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -93,12 +95,14 @@
 - 데이터그램 방식
   - 패킷의 목적지만 정해져있다면 중간 경로는 어딜 타든 신경쓰지 않기 때문에 핸드쉐이크 과정 같은 연결 설정 필요 없음
   - TCP의 과정을 거치지 않기 때문에 빠름
-    ![image.png](attachment:b1e6b234-e351-41fc-9699-e09a417e1737:image.png)
+    <img width="1772" height="602" alt="image" src="https://github.com/user-attachments/assets/570f1aaa-5b88-4b18-8e22-d05f3b50c9c2" />
+
 
 ### TCP 헤더와 UDP 헤더 크기 차이
 
 - TCP
-  ![image.png](attachment:a2c4e145-2922-4d25-a89a-688fefdeea77:image.png)
+  <img width="1730" height="596" alt="image" src="https://github.com/user-attachments/assets/c62d5b0f-b374-4226-aeb5-f8d901e044c3" />
+
   - 오래전에 설계되었고, 기능이 워낙 많아 헤더가 거의 풀방
   - Source Port: 데이터를 생성한 애플리케이션에서 사용하는 포트번호
   - Destination Port: 목적지 애플리케이션이 사용하는 포트 번호
@@ -110,7 +114,8 @@
   - Window size 필드: 수신자가 한번에 받을 수 있는 데이터의 양. 송신자는 Window size만큼 ACK를 기다리지 않고 데이터를 전송. ACK가 계속 왔다갔다 하지 않아도 됨
   - Checksum: 세그먼트 내용의 유효성과 손상 여부 검사
 - UDP
-  ![image.png](attachment:a6281b11-f005-493e-aa89-c2acfdcebe74:image.png)
+  <img width="1740" height="282" alt="image" src="https://github.com/user-attachments/assets/c33da7c0-3a0e-4e31-9ddd-5a235afd0591" />
+
   - Source Port: 데이터를 생성한 애플리케이션에서 사용하는 포트 번호
   - Destination Port: 목적지 애플리케이션이 사용하는 포트 번호
   - checksum: 중복 검사의 한 형태로, 오류 정정을 통해 공간(전자 통신)이나 시간(기억 장치)속에서 송신된 자료의 무결성을 보호하는 단순한 방법 (TCP의 체크섬과는 다르게 UDP의 체크섬은 사용해도 되고 안해도 되는 옵션)
@@ -136,19 +141,22 @@
 ## TCP 연결제어
 
 - 3-way handshake
-  ![image.png](attachment:a7591f19-c5c5-4eb4-ad35-43b76034fd65:image.png)
+  <img width="1768" height="642" alt="image" src="https://github.com/user-attachments/assets/4457d1f6-04b4-4909-b093-3b8d33d357ed" />
+
   1. 클라이언트는 접속을 요청하는 SYN 패킷을 보냄
      클라이언트는 응답을 기다리기 위해 SYN_SENT 상태로 변함
   2. LISTEN 상태였던 서버는 SYN 요청을 받으면, 클라이언트에게 요청을 수락하는 ACK 패킷과 SYN 패킷을 보냄 (서버도 클라이언트에 접속해야 양방향 통신이 되기 때문)
      SYN_RCVD(SYN_RECEIVED) 상태로 변하여 클라이언트가 ACK 패킷을 보낼 때까지 기다림
   3. 클라이언트는 다시 서버에 ACK 패킷을 보내고, 이후 ESTABLISHED 상태가 되어 통신이 가능하게 됨
-- 데이터 통신 과정
-  ![image.png](attachment:748b902d-2b8f-42eb-a731-cfe982524ada:image.png)
+- 데이터 통신
+  <img width="1678" height="400" alt="image" src="https://github.com/user-attachments/assets/301ae1ab-775c-44d2-bd6b-4f4e1eabb018" />
+
   1. Established 된 상태에서 서버에게 데이터를 보냄
   2. 서버는 잘 전송받았다고 ACK 플래그를 넣어 응답
   3. 만약 클라이언트가 서버로부터 ACK를 못받았으면 제대로 송신하지 못한걸로 판단하고 데이터를 재전송
 - 4-way handshake
-  ![image.png](attachment:20d15ad3-4019-47f6-bc19-5db31924533e:image.png)
+  <img width="1748" height="624" alt="image" src="https://github.com/user-attachments/assets/6928717d-7d93-44e4-b37b-0e5b7252ee9e" />
+
 
   1. 서버와 클랄이언트가 TCP 연결이 되어있는 상태에서 클라이언트가 접속을 끊기 위해 CLOSE() 함수를 호출
      → FIN 플래그 보내고 클라이언트는 FIN_WAIT1 상태로 변함
@@ -175,20 +183,24 @@
 - 송신하는 곳에서 감당이 안되게 많은 데이터를 빠르게 보내 수신하는 곳에서 문제가 일어나는 것을 방지
 - 슬라이딩 윈도우 방식을 사용
   - 윈도우라는 데이터를 담는 공간을 동적으로 조절하여 데이터량을 조절
-    ![image.png](attachment:5f618aee-190b-49dd-933a-ba3115a4cbd4:image.png)
+    <img width="1454" height="622" alt="image" src="https://github.com/user-attachments/assets/73f46740-9153-48e0-a763-034317507d89" />
+
 
 ### 오류 제어(Error Control)
 
 - 통신 도중에 데이터가 유실되거나 잘못된 데이터가 수신되었을 경우 대처
 - Go Bank N 기법과 Selective Repeat(선택적인 재전송) 기법을 사용
   - Go Back N 기법: 어느 데이터로부터 오류가 발생했는지 파악하여, 그 부분만 다시 순서대로 보내 제어
-    ![image.png](attachment:5b9703c5-3c46-4fdf-9dd8-83e458346b15:image.png)
+    <img width="758" height="1010" alt="image" src="https://github.com/user-attachments/assets/1ea509d2-d681-43c1-b818-107566b4a2ff" />
+
   - Selective Repeat 기법: 에러난 데이터만 재전송하고 그전에 받았던 순서가 잘못된 데이터 버퍼를 재정렬하여 제어
-    ![image.png](attachment:5b87987e-7a78-46c2-be62-3fce0a137be6:image.png)
+    <img width="724" height="1160" alt="image" src="https://github.com/user-attachments/assets/389a95c6-f7cd-4312-91f0-4d1e5be671a3" />
+
 
 ### 혼잡 제어 (Congestion Control)
+<img width="1020" height="708" alt="image" src="https://github.com/user-attachments/assets/24f05c6e-e0af-4e94-94b5-e27d0b0bc24f" />
 
-![image.png](attachment:4440bdca-5b30-476e-bc6c-b32a29865c4e:image.png)
+
 
 - 네트워크가 불안정하여 데이터가 원활히 통신이 안되면 제어를 통해 재전송을 하게되는데, 재전송 작업이 반복되면 네트워크가 붕괴될 수 있음
   → 네트워크 혼잡 상태가 감지되면 송신 측의 전송 데이터 크기를 조절하여 전송량 조절
