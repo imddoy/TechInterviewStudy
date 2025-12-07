@@ -41,10 +41,12 @@
     - **HOL(Head-of-Line) Blocking**
       - 큐 맨 앞 패킷이 특정 output 포트를 기다리느라 막혀 있을 때
       - 뒤에 있는 패킷이 다른 output 포트로 지금 당장 나갈 수 있어도 앞 패킷 때문에 함께 대기하는 현상
-        ![image.png](attachment:ac5d5229-6eb9-48af-91ee-f0dcd3cf182a:image.png)
+        <img width="1132" height="368" alt="image" src="https://github.com/user-attachments/assets/3d545680-84d8-4777-9e6b-d355f33ad67c" />
+
   - **Output 포트 Queue**
     - Switching 속도 > 링크 속도인 경우, 링크 대역폭 한계로 output 포트에서 큐 증가
-      ![image.png](attachment:58052bbc-8707-4737-a933-5bbb4223e495:image.png)
+      <img width="1262" height="369" alt="image" src="https://github.com/user-attachments/assets/b3ddc2e7-565c-4690-8f23-d968ec079de9" />
+
 - **결과**
   - **Queueing delay 증가**
   - 버퍼 오버플로 시 **패킷 드롭(data loss)** 발생
@@ -76,8 +78,8 @@
   - TCP 헤더 20B + IP 헤더 20B → **기본 40B 오버헤드**
 
 ### IP 헤더 주요 필드
+<img width="1133" height="706" alt="image" src="https://github.com/user-attachments/assets/17e43e29-72b5-4cff-83dc-c8772c7d8a0b" />
 
-![image.png](attachment:1969c95d-4b3e-4d7a-b3fc-201782e3e2b0:image.png)
 
 - 버전(IPv4/IPv6), 헤더 길이
 - 전체 길이(total length)
@@ -96,7 +98,8 @@
   - 각 fragment는 **자기만의 IP 헤더** 보유
   - 목적지에서 **재조립(reassembly)** 수행
 - ex)
-  ![image.png](attachment:384e47ca-0e47-4a85-827a-a8a84370f497:image.png)
+  <img width="1266" height="636" alt="image" src="https://github.com/user-attachments/assets/1c78c632-64b5-4ac5-aeea-25a90bb96672" />
+
   - 원본 데이터그램 길이: 4000B (헤더 20B + 데이터 3980B)
   - MTU = 1500B → 데이터 부분 최대 1480B씩 송신 가능
   - 분할
@@ -121,7 +124,8 @@
   - 실질적으로 하나의 **LAN** 과 같은 단위
 - 표기: CIDR
   - ex)
-    ![image.png](attachment:33907386-cbca-42f8-bf83-39660480f6d1:image.png)
+    <img width="320" height="100" alt="image" src="https://github.com/user-attachments/assets/8ae9fe0b-6749-438b-8bb5-57a411fb46ba" />
+
     - `200.23.16.0/23`
     - 앞 23bit: 서브넷 부분
     - 나머지 9bit: 호스트 부분 → 최대 2⁹ = 512 호스트
@@ -135,7 +139,8 @@
   - 더 구체적인 네트워크로 라우팅되는 효과
 - 효율적 포워딩을 위해 TCAM 등 하드웨어에도 특화된 구조 사용
 - ex)
-  ![image.png](attachment:011b72e3-8e60-4e9b-9ede-1fe1f97e8ca1:image.png)
+  <img width="1098" height="342" alt="image" src="https://github.com/user-attachments/assets/6ac4d869-1153-4938-80b9-7d753a0133c7" />
+
   11001000 00010111 00010110 10100001는 0에, 11001000 00010111 00011000 10101010은 1에 매칭
 
 ## DHCP 주소 자동 할당 프로토콜
@@ -143,7 +148,8 @@
 - 호스트가 네트워크에 접속할 때 **IP 주소·기본 게이트웨이·DNS 주소** 등을 **동적으로 임대(lease)** 받게 하는 프로토콜
 - **Plug-and-play 네트워킹** 구현
 
-![image.png](attachment:55e41844-6ef3-4b06-8852-5a16a951f35e:image.png)
+<img width="916" height="511" alt="image" src="https://github.com/user-attachments/assets/cb8cf527-b3ac-4ae4-ba38-7d28742a6ad9" />
+
 
 1. **DHCP Discover**
    - 호스트가 브로드캐스트로 “DHCP 서버 어디 있냐” 탐색
