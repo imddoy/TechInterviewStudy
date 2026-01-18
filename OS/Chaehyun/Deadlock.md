@@ -65,6 +65,30 @@
   - 세마포어의 복잡한 구현을 해결하기 위해 고안된 고수준 동기화 도구
   - Java의 synchornized
   - 내부적으로 Condition Variable을 사용하여 실행 순서 제어 (wait(), signal())
+  - condition variable
+    - 락만으로는 조건이 만족될때까지 기다리기를 표현하기 어려움
+    - 큐가 비어있으면 소비자는 락을 잡은 채로 대기하면 안됨. 생산자가 못 들어옴
+    - 항상 mutex와 함께, while로 조건 검사하기
+      - spurious wakeup, signal 경쟁, 꺠어난 뒤  조건이 다시 깨질 수 있음  
+
+### Locks
+- 락이 보장해야 하는 것
+  - Safety
+    - mutual exclusion 보장
+    - 보호하는 데이터 불변식 깨지지 않음
+  - Liveness
+    - deadlock-free
+    - starvation-free
+  - Performance
+    - 경쟁 없을 때 빠름
+    - 경쟁 있을 때도 과도한 CPU 낭비/컨텍스트스위치 최소화
+- Spin vs Sleep
+  - Spin
+    - 컨텍스트 스위치 없이 짧게 끝날 때 유리
+    - 오래 기다리면 CPU 낭비
+  - Sleep
+    - 오래 기다릴 때 CPU 절약
+    - 대신 잠들고 깨는 비용(스케줄링/시스템콜)이 듦      
 
 ### Problems
 - Producer-Consumer Problem
